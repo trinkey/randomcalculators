@@ -1,8 +1,8 @@
-equation = lambda x: math.sin(x / 10) * 50
+equation = lambda x: math.sin(x / 10) * 50 # MAKE SURE EQUATION STARTS WITH "lambda x: " and treat it as if it was "y = "
 width = 100
 height = 100
-linechar = "@"
-nolinechar = " "
+linechar = "@" # Char for when there is a line
+nolinechar = " " # Char for when there isnt a line
 startline = "​" # Zero width space to start/end line
 endline = "​" # Helps with alignment problems if nolinechar is whitespace
 
