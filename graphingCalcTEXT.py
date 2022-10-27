@@ -1,24 +1,58 @@
-equation = lambda x: x ** 2 - 5
+equation = lambda x: math.sin(x / 10) * 50
+width = 100
+height = 100
+linechar = "@"
+nolinechar = " "
+startline = "​" # Zero width space to start/end line
+endline = "​" # Helps with alignment problems if nolinechar is whitespace
 
-widthandheight = 16
+printStatus = True
 
+if printStatus: from time import sleep as s; from time import time as t; starttime = t()
 graph = []
-for i in range(widthandheight + 1):
-    graph.append(["--"] * (widthandheight + 1))
+import math
+for i in range(height + 1):
+    graph.append([nolinechar * 2] * (width + 1))
+if printStatus:
+    x = width * 10
+    for i in range(width * 10):
+        point = math.floor(equation((i / 10) - width / 2))
+        if point <= height / 2 and point >= -height / 2:
+            graph[math.floor(height / 2) - point][math.floor(i / 10)] = linechar * 2
+        x -= 1
+        if not x % 100:
+            print(str(x) + " maths left")
+            s(0.01)
+    del(x)
+else:
+    for i in range(width * 10):
+        point = math.floor(equation((i / 10) - width / 2))
+        if point <= height / 2 and point >= -height / 2:
+            graph[math.floor(height / 2) - point][math.floor(i / 10)] = linechar * 2
 
-for i in range(widthandheight * 10):
-    point = round(equation((i / 10) - widthandheight / 2))
-    if point <= widthandheight / 2 and point >= -widthandheight / 2:
-        graph[round(widthandheight / 2) - point][round(i / 10)] = "@@"
+del(width, height, equation, point)
 
-del(equation)
-
-output = ""
-for i in graph:
-    for o in i:
-        output += o
-    output += "\n"
-
+if printStatus: print("finished writing, time to start prepping to print"); print("Time elapsed: " + str(t() - starttime)); s(0.01)
+output = startline
+if printStatus:
+    x = len(graph)
+    for i in graph:
+        for o in i:
+            output += o
+        output += endline + "\n" + startline
+        x -= 1
+        if not x % 25:
+            print(str(x) + " lines left to parse")
+            print("Time elapsed: " + str(t() - starttime))
+            s(0.01)
+else:
+    for i in graph:
+        for o in i:
+            output += o
+        output += endline + "\n" + startline
+if printStatus: print("printing"); print("Time elapsed: " + str(t() - starttime)); s(0.01)
 del(graph)
 print(output)
 del(output)
+print("complete")
+print("Time elapsed: " + str(t() - starttime))
